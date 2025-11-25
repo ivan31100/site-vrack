@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { Music, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
@@ -31,12 +31,22 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <div className="flex items-center justify-between">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2 group">
-              <div className="w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-600 rounded-lg flex items-center justify-center group-hover:shadow-lg group-hover:shadow-amber-500/50 transition-all">
-                <Music className="w-6 h-6 text-white" />
-              </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">
-                VRACK
-              </span>
+              {/* Plain logo image, no button style */}
+              <img
+                src="/images/photos/vracklogo.png"
+                alt="VRACK logo"
+                className="w-100 h-20 object-contain"
+                onError={(e) => {
+                  const img = e.currentTarget as HTMLImageElement;
+                  if (!img.dataset.fallback) {
+                    img.dataset.fallback = 'svg';
+                    img.src = '/images/vracklogo.svg';
+                    return;
+                  }
+                  img.style.display = 'none';
+                }}
+              />
+
             </Link>
 
             {/* Desktop Navigation */}
